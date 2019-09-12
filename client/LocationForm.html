@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <link rel="manifest" href="/manifest.json">
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Hurricane App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="LocationForm.html">Location Form</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
+    </nav>
+    <div class="row" id="connectionStatus" style="margin-top: 55px;margin-left:0px"></div>
+
+
+    <main role="main" class="container">
+
+        <form id='locationform'>
+            <div>
+                    <div >
+                        <div id="body_LocationFormControl_up1">
+
+                            <div >
+                                <div class="row">
+                                    <div class="titleTop">
+                                        <h3>Enter Details</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 20px">
+                                    <div class="row">
+                                        <label for="FirstName">First Name:</label>
+                                        <input type="text" class="form-control" id="FirstName">
+                                    </div>
+                                    <div class="row">
+                                        <label for="LastName">Last Name:</label>
+                                        <input type="text" class="form-control" id="LastName">
+                                    </div>
+                                    <div class="row">
+                                        <label for="ContactNumber">Contact Number:</label>
+                                        <input type="number" class="form-control" id="ContactNumber">
+                                    </div>
+                                    <div class="row">
+                                        <label for="Remarks">Remarks:</label>
+                                        <input type="text" class="form-control" id="Remarks">
+                                    </div>
+                                    <div class="row" style="padding-top: 20px;">
+                                        <input type="button" name="$btnSubmit" value="Submit" onclick="submitter()"
+                                            id="body_LocationFormControl_btnSubmit" class="btn btn-dark">
+                                        <input type="button" style="margin-left: 20px;"
+                                            onclick="alert('This is not Implemented Yet');" class="btn btn-secondary"
+                                            value="Cancel">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </form>
+
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="/docs/4.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+        crossorigin="anonymous"></script>
+
+        <style type="text/css">
+            .container {
+                padding-left: 25px !important;
+                padding-right: 20px !important;
+            }
+        
+            .footer {
+                position: fixed;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                padding: 1rem;
+                background-color: #efefef;
+                text-align: center;
+            }
+        
+            .modal-backdrop {
+                display: none !important;
+            }
+        
+            .bg-blue {
+                background-color: #21a0d2 !important;
+            }
+        </style>
+        
+        <script type="text/javascript">
+        
+            var html5rocks = {};
+            window.indexedDB = window.indexedDB || window.webkitIndexedDB ||
+                window.mozIndexedDB;
+        
+            if ('webkitIndexedDB' in window) {
+                window.IDBTransaction = window.webkitIDBTransaction;
+                window.IDBKeyRange = window.webkitIDBKeyRange;
+            }
+        
+            html5rocks.indexedDB = {};
+            html5rocks.indexedDB.db = null;
+        
+            html5rocks.indexedDB.onerror = function (e) {
+                console.log(e);
+            };
+        
+            html5rocks.indexedDB.open = function () {
+                var version = 1;
+                var request = indexedDB.open("locations", version);
+        
+                // We can only create Object stores in a versionchange transaction.
+                request.onupgradeneeded = function (e) {
+                    var db = e.target.result;
+        
+                    // A versionchange transaction is started automatically.
+                    e.target.transaction.onerror = html5rocks.indexedDB.onerror;
+        
+                    if (db.objectStoreNames.contains("location")) {
+                        db.deleteObjectStore("location");
+                    }
+        
+                    var store = db.createObjectStore("location",
+                        { keyPath: "fname" });
+                };
+        
+                request.onsuccess = function (e) {
+                    html5rocks.indexedDB.db = e.target.result;
+                    //html5rocks.indexedDB.getAllLocationItems();
+                };
+        
+                request.onerror = html5rocks.indexedDB.onerror;
+            };
+        
+            html5rocks.indexedDB.addLocation = function (fname, lname, pno, remarks) {
+                var db = html5rocks.indexedDB.db;
+                var trans = db.transaction(["location"], "readwrite");
+                var store = trans.objectStore("location");
+        
+                var data = {
+                    "fname": fname,
+                    "lname": lname,
+                    "pno": pno,
+                    "remarks": remarks
+        
+                };
+        
+                var request = store.put(data);
+        
+                request.onsuccess = function (e) {
+                    //html5rocks.indexedDB.getAllLocationItems();
+                };
+        
+                request.onerror = function (e) {
+                    console.log("Error Adding: ", e);
+                };
+            };
+        
+            html5rocks.indexedDB.deleteLocation = function (id) {
+                var db = html5rocks.indexedDB.db;
+                var trans = db.transaction(["location"], "readwrite");
+                var store = trans.objectStore("location");
+        
+                var request = store.delete(id);
+        
+                request.onsuccess = function (e) {
+                    // html5rocks.indexedDB.getAllLocationItems();
+                };
+        
+                request.onerror = function (e) {
+                    console.log("Error Adding: ", e);
+                };
+            };
+        
+        
+        
+            function addLocation() {
+                var fname = document.getElementById("FirstName");
+                var lname = document.getElementById("LastName");
+                var pno = document.getElementById("ContactNumber");
+                var remarks = document.getElementById("Remarks");
+                html5rocks.indexedDB.addLocation(fname.value, lname.value, pno.value, remarks.value);
+                fname.value = "";
+                lname.value = "";
+                pno.value = "";
+                remarks.value = "";
+            }
+        
+            function init() {
+                html5rocks.indexedDB.open();
+            }
+        
+            window.addEventListener("DOMContentLoaded", init, false);
+        
+            function submitter() {
+                if (!navigator.onLine) {
+                    alert("We are Offline")
+                    console.log(navigator.serviceWorker.getRegistration())
+                    addLocation();
+                    registerOneTimeSync();
+                }
+                else {
+                    alert("We are Online")
+                }
+            }
+        
+            function registerOneTimeSync() {
+                if ('serviceWorker' in navigator) {
+        
+                    navigator.serviceWorker.ready.then(function (reg) {
+                        if (reg.sync) {
+                            reg.sync.register('oneTimeSync')
+                                .then(function (event) {
+                                    console.log('Sync registration successful', event);
+                                })
+                                .catch(function (error) {
+                                    console.log('Sync registration failed', error);
+                                });
+                        } else {
+                            console.log("Onw time Sync not supported");
+                        }
+                    });
+                } else {
+                    console.log('Service workers are not supported.');
+                }
+            }
+        
+            // Connection Status
+            function isOnline() {
+                var connectionStatus = document.getElementById('connectionStatus');
+        
+                if (navigator.onLine) {
+                    connectionStatus.innerHTML = '&nbsp;&nbsp;&nbsp;You are currently online!';
+                    connectionStatus.style.backgroundColor = "LimeGreen";
+                } else {
+                    connectionStatus.innerHTML = '&nbsp;&nbsp;&nbsp;You are currently offline! <br>&nbsp;&nbsp;&nbsp;Your data will be synced when you are online';
+                    connectionStatus.style.backgroundColor = "Red";
+                }
+            }
+        
+            window.addEventListener('online', isOnline);
+            window.addEventListener('offline', isOnline);
+            isOnline();
+        </script>
+</body>
+
+</html>
+
+

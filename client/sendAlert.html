@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="manifest" href="/manifest.json">
+
+    <style type="text/css">
+        .container {
+            padding-left: 25px !important;
+            padding-right: 20px !important;
+        }
+
+        .footer {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 1rem;
+            background-color: #efefef;
+            text-align: center;
+        }
+
+        .modal-backdrop {
+            display: none !important;
+        }
+
+        .bg-blue {
+            background-color: #21a0d2 !important;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main role="main" class="container">
+
+        <form id='locationform'>
+            <div>
+                <div>
+                    <div id="body_LocationFormControl_up1">
+
+                        <div>
+                            <div class="row">
+                                <div class="titleTop">
+                                    <h3>Send Alert</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px">
+                            <div class="row">
+                                <label for="title">Title :</label>
+                                <input type="text" class="form-control" id="title">
+                            </div>
+                            <div class="row">
+                                <label for="desc">Desc :</label>
+                                <input type="text" class="form-control" id="desc">
+                            </div>
+
+                            <div class="row" style="padding-top: 20px;">
+                                <input type="button" name="$btnSubmit" value="Submit" onclick="send()"
+                                    id="body_LocationFormControl_btnSubmit" class="btn btn-dark">
+                                <input type="button" style="margin-left: 20px;"
+                                    onclick="alert('This is not Implemented Yet');" class="btn btn-secondary"
+                                    value="Cancel">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+            </div>
+        </form>
+
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="/docs/4.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+        crossorigin="anonymous"></script>
+    <script>
+        // Register SW, Register Push, Send Push
+        async function send() {
+            var titleData = document.getElementById("title").value;
+            var descData = document.getElementById("desc").value;
+            await fetch("http://localhost:5000/alerter", {
+                method: "POST",
+                body: JSON.stringify({ title: titleData, body: descData }),
+                headers: {
+                    "content-type": "application/json"
+                }
+            });
+            titleData.value = "";
+            descData.value = "";
+        }
+
+    </script>
+</body>
+
+</html>
