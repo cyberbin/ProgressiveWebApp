@@ -100,7 +100,7 @@
         async function send() {
             var titleData = document.getElementById("title").value;
             var descData = document.getElementById("desc").value;
-            await fetch("http://localhost:5000/alerter", {
+            await fetch("https://hpwa.eastus.cloudapp.azure.com/alerter", {
                 method: "POST",
                 body: JSON.stringify({ title: titleData, body: descData }),
                 headers: {
