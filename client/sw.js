@@ -1,7 +1,14 @@
 var CACHE = 'network-or-cache';
 
 var urlsToCache = ['/index.html', '/',
-  '/LocationForm.html'
+  '/LocationForm.html',
+  '/internetError.html',
+  'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
+  'js/main.js',
+  'https://code.jquery.com/jquery-3.3.1.slim.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
+  'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'
+
 ];
 
 
@@ -17,13 +24,17 @@ self.addEventListener('install', function (evt) {
 });
 
 self.addEventListener('fetch', function (event) {
-  if (!(navigator.onLine) && event.request.url == 'http://localhost/login.aspx') {
+    console.log(" includes online : " + event.request.url.includes('online.html'))
+    console.log(" includes grid : " + event.request.url.includes('grid.html'))
+    console.log(" online : " + navigator.onLine)
+  if ((event.request.url.includes('online.html') || event.request.url.includes('grid.html')) && 
+     !navigator.onLine) {
     event.respondWith(
-      caches.match('/home.aspx')
+      caches.match('/internetError.html')
       .then(function (response) {
         // Cache hit - return response
         if (response) {
-          console.log("Returning Home page : ")
+          console.log("Returning 404 page : ")
           return response;
         }
       })

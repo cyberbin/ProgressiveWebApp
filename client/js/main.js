@@ -24,7 +24,7 @@ async function send() {
 
   // Send Push Notification
   console.log("Sending Push...");
-  await fetch("https://hpwa.eastus.cloudapp.azure.com/subscribe", {
+  await fetch("https://ec2-18-190-143-82.us-east-2.compute.amazonaws.com/subscribe", {
     method: "POST",
     body: JSON.stringify(subscription),
     headers: {

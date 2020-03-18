@@ -40,6 +40,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="online.html">Online</a>
                   </li>
+	<li class="nav-item">
+          <a class="nav-link" href="grid.html">Data Grid</a>
+        </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -244,6 +247,7 @@
                 console.log(navigator.serviceWorker.getRegistration())
                 addLocation();
                 registerOneTimeSync();
+                alert("Saved");
             } else {
                 //alert("We are Online")
                 var fname = document.getElementById("FirstName");

@@ -4,6 +4,7 @@ var bodyParser = require('body-parser')
 var path = require('path')
 var fs = require('fs');
 var https = require('https');
+var http = require('http');
 var MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
 const routes = require('./Route/api');
@@ -11,21 +12,19 @@ const Subscription = require('./Model/subscription');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/gulfCoast')
+mongoose.connect('mongodb://admin:password@localhost/gulfCoast?authSource=admin&w=1')
 mongoose.Promise = global.Promise;
 app.use(express.static(path.join(__dirname, "client")))
 app.use(bodyParser.json());
-app.use(routes);
+app.use(routes); 
 
-var url = "mongodb://localhost:27017/";
-
-
+var url = "mongodb://admin:password@localhost:27017/";
 
 
-const httpsOptions = {
-  cert: fs.readFileSync(path.join(__dirname, 'hpwa.eastus.cloudapp.azure.com.crt')),
-  key: fs.readFileSync(path.join(__dirname, 'hpwa.eastus.cloudapp.azure.com.key'))
-}
+// const httpsOptions = {
+//   cert: fs.readFileSync(path.join(__dirname, 'hpwa.crt')),
+//   key: fs.readFileSync(path.join(__dirname, 'hpwa.key'))
+// }
 
 
 
@@ -56,10 +55,11 @@ app.post('/subscribe', (req, res) => {
 
 });
 
-https.createServer(httpsOptions, app).listen(443, () => {
-  console.log("Listening on 443");
-})
+// https.createServer(httpsOptions, app).listen(443, () => {
+//   console.log("Listening on 443");
+// })
 
+app.listen(80,()=>console.log("listening on port 80"));
 
 app.post('/alerter', (req, res) => {
   console.log("Alert call Received");

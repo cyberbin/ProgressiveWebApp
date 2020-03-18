@@ -7,7 +7,6 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <title>Page Title</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <script src='js/main.js'></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -44,6 +43,41 @@
       padding: 3rem 1.5rem;
       text-align: center;
     }
+
+	table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top:10px;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #ccd;
+}
+
+tr:nth-child(even) {
+  background-color: #ecf6fc;
+}
+
+tr:nth-child(odd) {
+  background-color: #ddeedd;
+}
+table th:nth-child(1){ display:none;} 
+table td:nth-child(1){ display:none;}
+table th:nth-child(4){ display:none;} 
+table td:nth-child(4){ display:none;} 
+table th:nth-child(5){ display:none;} 
+table td:nth-child(5){ display:none;} 
+table th:nth-child(6){ display:none;} 
+table td:nth-child(6){ display:none;} 
+
   </style>
 </head>
 
@@ -79,18 +113,79 @@
 
   <main role="main" class="container">
 
-    <div class="starter-template">
-      <h1>Gulf Coast App</h1>
-      <p class="lead">Gulf coast app is used to get details about the costal Areas.
-        It also has Hurricane Alert system and Offline Location Filler Form
-      </p>
-    </div>
+
 
   </main><!-- /.container -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+
+
+
+<script type="text/javascript">
+	var jData =  '[{"_id":"","No Data Found":"Offline"}]';
+	function submitter() {
+                            
+                const url = '/locations';
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                }).then((resp) => resp.json()) // Transform the data into json
+  .then(function(data) {
+	ConvertToTable(data)
+    })
+            }
+
+
+        // Connection Status
+        function isOnline() {
+            var connectionStatus = document.getElementById('connectionStatus');
+
+            if (navigator.onLine) {
+                connectionStatus.innerHTML = '&nbsp;&nbsp;&nbsp;You are currently online!';
+                connectionStatus.style.backgroundColor = "LimeGreen";
+            } else {
+                connectionStatus.innerHTML =
+                    '&nbsp;&nbsp;&nbsp;You are currently offline! <br>&nbsp;&nbsp;&nbsp;Your data will be synced when you are online';
+                connectionStatus.style.backgroundColor = "Red";
+            }
+        }
+
+	var seperator = ',';
+	$('#json').html(jData);
+	$('#btnConvert').click(function() {
+	  ConvertToTable(jData);
+	});
+
+	function ConvertToTable(jData) {
+	  var arrJSON = typeof jData != 'object' ? JSON.parse(jData) : jData;
+	  var $table = $('<table/>');
+	  var $headerTr = $('<tr/>');
+  
+	  for (var index in arrJSON[0]) {
+	    $headerTr.append($('<th/>').html(index));
+	  }
+	  $table.append($headerTr);
+	  for (var i = 0; i < arrJSON.length; i++) {
+	   var $tableTr = $('<tr/>');
+	    for (var index in arrJSON[i]) {
+	      $tableTr.append($('<td/>').html(arrJSON[i][index]));
+	    }
+	    $table.append($tableTr);
+	  }
+	  $('body').append($table);
+	}
+
+
+        window.addEventListener('online', isOnline);
+        window.addEventListener('offline', isOnline);
+       // isOnline();
+	submitter();
+	
+    </script>
 </body>
 
 </html>
